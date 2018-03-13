@@ -7,9 +7,7 @@ namespace SC.DAL {
         private List<TicketResponse> responses;
         private List<Ticket> tickets;
 
-        public TicketRepositoryHC() {
-            Seed();
-        }
+        public TicketRepositoryHC() => Seed();
 
         private void Seed() {
             tickets = new List<Ticket>();
@@ -107,13 +105,9 @@ namespace SC.DAL {
             return ticket;
         }
 
-        public IEnumerable<Ticket> ReadTickets() {
-            return tickets;
-        }
+        public IEnumerable<Ticket> ReadTickets() => tickets;
 
-        public Ticket ReadTicket(int ticketNumber) {
-            return tickets.Find(t => t.TicketNumber == ticketNumber);
-        }
+        public Ticket ReadTicket(int ticketNumber) => tickets.Find(t => t.TicketNumber == ticketNumber);
 
         public void UpdateTicket(Ticket ticket) {
             // Do nothing! All data lives in memory, everything references the same objects!!
@@ -122,11 +116,10 @@ namespace SC.DAL {
         public void DeleteTicket(int ticketNumber) {
             responses.RemoveAll(r => r.Ticket.TicketNumber == ticketNumber);
             tickets.Remove(ReadTicket(ticketNumber));
-        }
+         }
 
-        public IEnumerable<TicketResponse> ReadTicketResponsesOfTicket(int ticketNumber) {
-            return tickets.Find(t => t.TicketNumber == ticketNumber).Responses;
-        }
+        public IEnumerable<TicketResponse> ReadTicketResponsesOfTicket(int ticketNumber) => 
+            tickets.Find(t => t.TicketNumber == ticketNumber).Responses;
 
         public TicketResponse CreateTicketResponse(TicketResponse response) {
             response.Id = responses.Count + 1;
