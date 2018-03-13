@@ -9,7 +9,6 @@ namespace SC.DAL.EF {
 
         public TicketRepository() {
             ctx = new SupportCenterDbContext();
-
             ctx.Database.Initialize(false);
         }
 
