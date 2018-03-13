@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
-using UI_MVC.Models;
 
-namespace UI_MVC.Controllers {
-    public class HomeController : Controller {
-        public IActionResult Index() {
+namespace SC.UI.Web.MVC.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
             return View();
         }
 
-        public IActionResult About() {
-            ViewData["Message"] = "Your application description page.";
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Contact() {
-            ViewData["Message"] = "Your contact page.";
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        public IActionResult Error() {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }
