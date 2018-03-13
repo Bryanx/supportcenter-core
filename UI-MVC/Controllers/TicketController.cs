@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SC.BL;
 using SC.BL.Domain;
 using SC.UI.Web.MVC.Models;
-namespace SC.UI.Web.MVC.Controllers
-{
-    public class TicketController : Controller
-    {
-        private ITicketManager mgr = new TicketManager();
+
+namespace SC.UI.Web.MVC.Controllers {
+    public class TicketController : Controller {
+        private readonly ITicketManager mgr = new TicketManager();
 
         // GET: Ticket
-        public ActionResult Index()
-        {
-            IEnumerable<Ticket> tickets = mgr.GetTickets();
+        public ActionResult Index() {
+            var tickets = mgr.GetTickets();
             return View(tickets);
         }
 
         // GET: Ticket/Details/5
-        public ActionResult Details(int id)
-        {
-            Ticket ticket = mgr.GetTicket(id);
+        public ActionResult Details(int id) {
+            var ticket = mgr.GetTicket(id);
 
             var responses = mgr.GetTicketResponses(id).ToList();
 
@@ -35,8 +29,7 @@ namespace SC.UI.Web.MVC.Controllers
         }
 
         // GET: Ticket/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
@@ -54,31 +47,26 @@ namespace SC.UI.Web.MVC.Controllers
           return View();
         } */
         // ADHV view-model 'CreateTicketVM'
-        public ActionResult Create(CreateTicketVM newTicket)
-        {
-            if (ModelState.IsValid)
-            {
-                Ticket ticket = mgr.AddTicket(newTicket.AccId, newTicket.Problem);
+        public ActionResult Create(CreateTicketVM newTicket) {
+            if (ModelState.IsValid) {
+                var ticket = mgr.AddTicket(newTicket.AccId, newTicket.Problem);
 
-                return RedirectToAction("Details", new { id = ticket.TicketNumber });
+                return RedirectToAction("Details", new {id = ticket.TicketNumber});
             }
 
             return View();
         }
 
         // GET: Ticket/Edit/5
-        public ActionResult Edit(int id)
-        {
-            Ticket ticket = mgr.GetTicket(id);
+        public ActionResult Edit(int id) {
+            var ticket = mgr.GetTicket(id);
             return View(ticket);
         }
 
         // POST: Ticket/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Ticket ticket)
-        {
-            if (ModelState.IsValid)
-            {
+        public ActionResult Edit(int id, Ticket ticket) {
+            if (ModelState.IsValid) {
                 mgr.ChangeTicket(ticket);
 
                 return RedirectToAction("Index");
@@ -88,24 +76,20 @@ namespace SC.UI.Web.MVC.Controllers
         }
 
         // GET: Ticket/Delete/5
-        public ActionResult Delete(int id)
-        {
-            Ticket ticket = mgr.GetTicket(id);
+        public ActionResult Delete(int id) {
+            var ticket = mgr.GetTicket(id);
             return View(ticket);
         }
 
         // POST: Ticket/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
+        public ActionResult Delete(int id, FormCollection collection) {
+            try {
                 mgr.RemoveTicket(id);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
+            catch {
                 return View();
             }
         }

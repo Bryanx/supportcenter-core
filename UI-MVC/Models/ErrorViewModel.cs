@@ -1,5 +1,3 @@
-using System;
-
 namespace UI_MVC.Models {
     public class ErrorViewModel {
         public string RequestId { get; set; }

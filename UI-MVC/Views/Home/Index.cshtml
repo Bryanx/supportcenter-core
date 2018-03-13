@@ -11,12 +11,14 @@
     <div class="col-md-4">
         <h2>Nieuw ticket</h2>
         <p>Maak een nieuw ticket aan in het systeem.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Create", "Ticket")">Nieuw ticket</a></p>
+        <p>
+            <a class="btn btn-default" href="@Url.Action("Create", "Ticket")">Nieuw ticket</a>
+        </p>
     </div>
     <div class="col-md-4">
         <h2>Alle tickets</h2>
         <p>Toont een lijst van alle bestaande tickets.</p>
-        <p>@Html.ActionLink("Alle tickets", "Index", "Ticket", null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Alle tickets", "Index", "Ticket", null, new {@class = "btn btn-default"})</p>
     </div>
     <div class="col-md-4">
         <h2>Toon ticket</h2>
