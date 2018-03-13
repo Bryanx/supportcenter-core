@@ -10,17 +10,11 @@ namespace SC.BL {
     public class TicketManager : ITicketManager {
         private readonly ITicketRepository repo;
 
-        public TicketManager() {
-            repo = new TicketRepository();
-        }
+        public TicketManager() => repo = new TicketRepository();
 
-        public IEnumerable<Ticket> GetTickets() {
-            return repo.ReadTickets();
-        }
+        public IEnumerable<Ticket> GetTickets() => repo.ReadTickets();
 
-        public Ticket GetTicket(int ticketNumber) {
-            return repo.ReadTicket(ticketNumber);
-        }
+        public Ticket GetTicket(int ticketNumber) => repo.ReadTicket(ticketNumber);
 
         public Ticket AddTicket(int accountId, string question) {
             var t = new Ticket {
@@ -48,13 +42,9 @@ namespace SC.BL {
             repo.UpdateTicket(ticket);
         }
 
-        public void RemoveTicket(int ticketNumber) {
-            repo.DeleteTicket(ticketNumber);
-        }
+        public void RemoveTicket(int ticketNumber) => repo.DeleteTicket(ticketNumber);
 
-        public IEnumerable<TicketResponse> GetTicketResponses(int ticketNumber) {
-            return repo.ReadTicketResponsesOfTicket(ticketNumber);
-        }
+        public IEnumerable<TicketResponse> GetTicketResponses(int ticketNumber) => repo.ReadTicketResponsesOfTicket(ticketNumber);
 
         public TicketResponse AddTicketResponse(int ticketNumber, string response, bool isClientResponse) {
             var ticketToAddResponseTo = GetTicket(ticketNumber);
@@ -95,9 +85,7 @@ namespace SC.BL {
             throw new ArgumentException("Ticketnumber '" + ticketNumber + "' not found!");
         }
 
-        public void ChangeTicketStateToClosed(int ticketNumber) {
-            repo.UpdateTicketStateToClosed(ticketNumber);
-        }
+        public void ChangeTicketStateToClosed(int ticketNumber) => repo.UpdateTicketStateToClosed(ticketNumber);
 
         private Ticket AddTicket(Ticket ticket) {
             Validate(ticket);
