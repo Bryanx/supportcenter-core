@@ -77,9 +77,9 @@ namespace SC.UI.CA {
             Write("Ticketnummer: ");
             var input = int.Parse(ReadLine());
 
-            //mgr.ChangeTicketStateToClosed(input);
+            mgr.ChangeTicketStateToClosed(input);
             // via WebAPI-service
-            srv.ChangeTicketStateToClosed(input);
+            //srv.ChangeTicketStateToClosed(input);
         }
 
         private static void PrintAllTickets() {
@@ -111,9 +111,9 @@ namespace SC.UI.CA {
             Write("Ticketnummer: ");
             var input = int.Parse(ReadLine());
 
-            //IEnumerable<TicketResponse> responses = mgr.GetTicketResponses(input);
+            IEnumerable<TicketResponse> responses = mgr.GetTicketResponses(input);
             // via Web API-service
-            var responses = srv.GetTicketResponses(input);
+            //var responses = srv.GetTicketResponses(input);
             if (responses != null) PrintTicketResponses(responses);
         }
 
@@ -126,6 +126,7 @@ namespace SC.UI.CA {
             var accountNumber = 0;
             var problem = "";
             var device = "";
+            
 
             Write("Is het een hardware probleem (j/n)? ");
             var isHardwareProblem = ReadLine().ToLower() == "j";
@@ -151,9 +152,9 @@ namespace SC.UI.CA {
             Write("Antwoord: ");
             var response = ReadLine();
 
-            //mgr.AddTicketResponse(ticketNumber, response, false);
+            mgr.AddTicketResponse(ticketNumber, response, false);
             // via WebAPI-service
-            srv.AddTicketResponse(ticketNumber, response, false);
+            //srv.AddTicketResponse(ticketNumber, response, false);
         }
     }
 }
