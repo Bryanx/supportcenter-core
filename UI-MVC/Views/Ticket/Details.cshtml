@@ -100,13 +100,18 @@
             $("#addNewResponse").show();
         }
 
+        var addedResponses = [];
         function addResponseToList(response) {
-            const date = new Date(response.date);
-            const checked = response.IsClientResponse ? 'checked="checked"' : '';
-            $('table#responses')
-                .append(
-                    "<tr><td>"+response.text+"</td><td>"+date.toLocaleDateString()+ date.toLocaleTimeString()+
-                    "</td><td><input type='checkbox' class='check-box' disabled='disabled'"+ response.checked + "/></td></tr>");
+            var index = $.inArray(response.id, addedResponses);
+            if (!(index >= 0)) {
+                const date = new Date(response.date);
+                const checked = response.IsClientResponse ? 'checked="checked"' : '';
+                $('table#responses')
+                    .append(
+                        "<tr><td>"+response.text+"</td><td>"+date.toLocaleDateString()+ date.toLocaleTimeString()+
+                        "</td><td><input type='checkbox' class='check-box' disabled='disabled'"+ response.checked + "/></td></tr>");
+                addedResponses.push(response.id);
+            }
         }
 
         // Voeg nieuw response toe
