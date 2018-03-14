@@ -141,7 +141,9 @@ namespace SC.UI.CA {
             problem = ReadLine();
 
             if (!isHardwareProblem)
-                mgr.AddTicket(accountNumber, problem);
+            {
+                Ticket ticket = mgr.AddTicket(accountNumber, problem);
+            }
             else
                 mgr.AddTicket(accountNumber, device, problem);
         }

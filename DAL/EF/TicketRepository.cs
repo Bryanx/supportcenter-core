@@ -61,6 +61,7 @@ namespace SC.DAL.EF {
             var ticket = ReadTicket(ticketNumber);
             var response = ticket.Responses.ToList();
             //var responses = ctx.TicketResponses.Where(r => r.Ticket.TicketNumber == ticketNumber).AsEnumerable();
+
             return response;
         }
 

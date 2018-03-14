@@ -105,8 +105,8 @@
             const checked = response.IsClientResponse ? 'checked="checked"' : '';
             $('table#responses')
                 .append(
-                    `<tr><td>${response.Text}</td><td>${date.toLocaleDateString()} ${date.toLocaleTimeString()
-                    }</td><td><input type="checkbox" class="check-box" disabled="disabled" ${checked} /></td></tr>`);
+                    "<tr><td>"+response.Text+"</td><td>"+date.toLocaleDateString()+ date.toLocaleTimeString()+
+                    "</td><td><input type='checkbox' class='check-box' disabled='disabled'"+ response.checked + "/></td></tr>");
         }
 
         // Voeg nieuw response toe

@@ -1,28 +1,35 @@
 ﻿using System.Linq;
 using System.Net;
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 using SC.BL;
 using SC.UI.Web.MVC.Models;
+using System.Collections.Generic;
+using SC.BL.Domain;
+
 
 namespace SC.UI.Web.MVC.Controllers.Api {
-    public class TicketResponseController : ApiController {
+    [Route("api/[controller]")]
+    public class TicketResponseController : ControllerBase {
         private readonly ITicketManager mgr = new TicketManager();
 
-        public IHttpActionResult Get(int ticketNumber) {
+        [HttpGet("{ticketNumber?}")]
+        public IEnumerable<TicketResponse> Get(int ticketNumber) {
             var responses = mgr.GetTicketResponses(ticketNumber);
 
             if (responses == null || responses.Count() == 0)
-                return StatusCode(HttpStatusCode.NoContent);
+                return null;
+            
 
-            return Ok(responses);
+            foreach (var r in responses)
+                r.Ticket = null;
+            return responses;
         }
-
-        public IHttpActionResult Post(NewTicketResponseDTO response) {
+        
+        [HttpPost]
+        public IActionResult Post(NewTicketResponseDTO response) {
             var createdResponse =
                 mgr.AddTicketResponse(response.TicketNumber, response.ResponseText, response.IsClientResponse);
 
-            if (createdResponse == null)
-                return BadRequest("Er is iets misgelopen bij het registreren van het antwoord!");
 
             //// Circulaire referentie!! (TicketResponse <-> Ticket) -> can't be serialized!!
             //return CreatedAtRoute("DefaultApi",
@@ -41,6 +48,8 @@ namespace SC.UI.Web.MVC.Controllers.Api {
             return CreatedAtRoute("DefaultApi",
                 new {Controller = "TicketResponse", id = responseData.Id},
                 responseData);
+                
+            
         }
     }
 }
