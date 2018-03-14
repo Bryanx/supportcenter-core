@@ -101,11 +101,11 @@
         }
 
         function addResponseToList(response) {
-            const date = new Date(response.Date);
+            const date = new Date(response.date);
             const checked = response.IsClientResponse ? 'checked="checked"' : '';
             $('table#responses')
                 .append(
-                    "<tr><td>"+response.Text+"</td><td>"+date.toLocaleDateString()+ date.toLocaleTimeString()+
+                    "<tr><td>"+response.text+"</td><td>"+date.toLocaleDateString()+ date.toLocaleTimeString()+
                     "</td><td><input type='checkbox' class='check-box' disabled='disabled'"+ response.checked + "/></td></tr>");
         }
 
