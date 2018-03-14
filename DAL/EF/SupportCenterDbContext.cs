@@ -8,7 +8,7 @@ namespace SC.DAL.EF {
     [DbConfigurationType(typeof(SupportCenterDbConfiguration))]
     internal class SupportCenterDbContext : DbContext /* 'public' for testing with project 'DAL-Testing'! */ {
         public SupportCenterDbContext()
-            : base("SupportCenterDB_EFCodeFirst") {
+            : base("myHotel-EF") {
             //Database.SetInitializer<SupportCenterDbContext>(new SupportCenterDbInitializer()); // moved to 'SupportCenterDbConfiguration'
         }
 
